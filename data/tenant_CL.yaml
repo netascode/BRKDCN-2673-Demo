@@ -1,0 +1,37 @@
+---
+apic:
+  tenants:
+    - name: BRKDCN-2673
+
+      vrfs:
+        - name: CL
+
+      bridge_domains:
+        - name: VLAN101
+          vrf: CL
+          subnets:
+            - ip: 10.1.0.1/24
+        - name: VLAN102
+          vrf: CL
+          subnets:
+            - ip: 10.1.1.1/24
+        - name: VLAN103
+          vrf: CL
+          subnets:
+            - ip: 10.1.2.1/23
+        - name: VLAN104
+          vrf: CL
+          subnets:
+            - ip: 10.1.3.1/23
+
+      application_profiles:
+        - name: DEV
+          endpoint_groups:
+            - name: VLAN101
+              bridge_domain: VLAN101
+            - name: VLAN102
+              bridge_domain: VLAN102
+            - name: VLAN103
+              bridge_domain: VLAN103
+            - name: VLAN104
+              bridge_domain: VLAN104
