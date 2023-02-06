@@ -65,12 +65,6 @@ jobs:
           iac-test --data ./data --templates ./tests/templates --output ./tests/results/aci |& tee test_output.txt
           \cp tests/results/aci/log.html /tmp
 
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: tests/results/aci/log.html
-
       - name: Webex Notifcation
         if: always()
         env:
@@ -93,16 +87,16 @@ jobs:
             --form "markdown=${FULL_MESSAGE}" \
             ${URL}
 
-      # - name: Checkout Github Pages
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: gh-pages
+      - name: Checkout Github Pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
 
-      # - name: Publish Github Pages
-      #   run: |
-      #     \cp /tmp/log.html ./
-      #     git config user.name "GitHub Actions Bot"
-      #     git config user.email "<>"
-      #     git add log.html
-      #     git commit -a -m "Update test report" --allow-empty
-      #     git push
+      - name: Publish Github Pages
+        run: |
+          \cp /tmp/log.html ./
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add log.html
+          git commit -a -m "Update test report" --allow-empty
+          git push
