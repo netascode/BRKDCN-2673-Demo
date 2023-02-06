@@ -8,7 +8,7 @@ VALIDATION_OUTPUT = """\n**Validation Errors**
 ```
 """
 
-TEST_OUTPUT = """\n[**Testing**](https://netascode.github.io/DEVNET-2097-Demo/log.html)
+TEST_OUTPUT = """\n[**Testing**](https://netascode.github.io/BRKDCN-2673-Demo/log.html)
 ```
 """
 

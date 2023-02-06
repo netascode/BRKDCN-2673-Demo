@@ -43,7 +43,6 @@ jobs:
           ACI_URL: ${{ secrets.ACI_URL }}
           ACI_USERNAME: ${{ secrets.ACI_USERNAME }}
           ACI_PASSWORD: ${{ secrets.ACI_PASSWORD }}
-          ACI_RETRIES: 4
         run: terraform apply -input=false -auto-approve
 
       - name: Test Idempotency
@@ -52,7 +51,6 @@ jobs:
           ACI_URL: ${{ secrets.ACI_URL }}
           ACI_USERNAME: ${{ secrets.ACI_USERNAME }}
           ACI_PASSWORD: ${{ secrets.ACI_PASSWORD }}
-          ACI_RETRIES: 4
         run: terraform plan -input=false -detailed-exitcode
 
       - name: Test Health
