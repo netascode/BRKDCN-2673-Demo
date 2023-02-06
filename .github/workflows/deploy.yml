@@ -87,16 +87,16 @@ jobs:
             --form "markdown=${FULL_MESSAGE}" \
             ${URL}
 
-      - name: Checkout Github Pages
-        uses: actions/checkout@v3
-        with:
-          ref: gh-pages
+      # - name: Checkout Github Pages
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ref: gh-pages
 
-      - name: Publish Github Pages
-        run: |
-          \cp /tmp/log.html ./
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git add log.html
-          git commit -a -m "Update test report" --allow-empty
-          git push
+      # - name: Publish Github Pages
+      #   run: |
+      #     \cp /tmp/log.html ./
+      #     git config user.name "GitHub Actions Bot"
+      #     git config user.email "<>"
+      #     git add log.html
+      #     git commit -a -m "Update test report" --allow-empty
+      #     git push
