@@ -65,6 +65,12 @@ jobs:
           iac-test --data ./data --templates ./tests/templates --output ./tests/results/aci |& tee test_output.txt
           \cp tests/results/aci/log.html /tmp
 
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: tests/results/aci/log.html
+
       - name: Webex Notifcation
         if: always()
         env:
