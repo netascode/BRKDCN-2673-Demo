@@ -29,7 +29,7 @@ jobs:
       - name: Cache Terraform
         uses: actions/cache@v3
         with:
-          path: ~/.terraform
+          path: .terraform
           key: terraform
 
       - name: Terraform Init
