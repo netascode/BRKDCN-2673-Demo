@@ -26,8 +26,8 @@ jobs:
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v2
 
-      - name: Cache Terraform
-        uses: actions/cache@v3
+      - name: Restore Terraform Cache
+        uses: actions/cache/restore@v3
         with:
           path: .terraform
           key: terraform
@@ -37,8 +37,11 @@ jobs:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
         run: terraform init -input=false
 
-      - name: Debug
-        run: ls -la
+      - name: Save Terraform Cache
+        uses: actions/cache/save@v3
+        with:
+          path: .terraform
+          key: terraform
 
       - name: Terraform Apply
         env:
@@ -101,6 +104,3 @@ jobs:
           git add log.html
           git commit -a -m "Update test report" --allow-empty
           git push
-
-      - name: Debug2
-        run: ls -la
