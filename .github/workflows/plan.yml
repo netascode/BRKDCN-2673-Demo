@@ -34,6 +34,12 @@ jobs:
           path: .terraform
           key: terraform
 
+      - name: Restore Defaults Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: defaults.yaml
+          key: defaults
+
       - name: Terraform Plan
         id: plan
         env:
