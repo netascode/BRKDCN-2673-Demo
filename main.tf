@@ -30,7 +30,7 @@ module "tenant" {
   source  = "netascode/nac-tenant/aci"
   version = "0.4.2"
 
-  for_each    = { for tenant in try(local.model.apic.tenants, []) : tenant.name => tenant }
+  for_each    = { for tenant in try(module.merge.model.apic.tenants, []) : tenant.name => tenant }
   model       = module.merge.model
   tenant_name = each.value.name
 }
