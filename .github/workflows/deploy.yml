@@ -101,3 +101,6 @@ jobs:
           git add log.html
           git commit -a -m "Update test report" --allow-empty
           git push
+
+      - name: Debug2
+        run: ls -la
