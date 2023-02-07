@@ -19,6 +19,10 @@ apic:
           vrf: CL
           subnets:
             - ip: 10.1.2.1/23
+        - name: VLAN104
+          vrf: CL
+          subnets:
+            - ip: 10.1.4.1/23
 
       application_profiles:
         - name: DEV
@@ -29,3 +33,5 @@ apic:
               bridge_domain: VLAN102
             - name: VLAN103
               bridge_domain: VLAN103
+            - name: VLAN104
+              bridge_domain: VLAN104

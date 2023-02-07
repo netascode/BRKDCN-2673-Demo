@@ -17,16 +17,28 @@ jobs:
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v2
 
-      - name: Cache Terraform
-        uses: actions/cache@v3
+      - name: Restore Terraform Cache
+        uses: actions/cache/restore@v3
         with:
-          path: ~/.terraform
+          path: .terraform
           key: terraform
 
       - name: Terraform Init
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
         run: terraform init -input=false
+
+      - name: Save Terraform Cache
+        uses: actions/cache/save@v3
+        with:
+          path: .terraform
+          key: terraform
+
+      - name: Restore Defaults Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: defaults.yaml
+          key: defaults
 
       - name: Terraform Plan
         id: plan
