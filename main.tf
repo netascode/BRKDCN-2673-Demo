@@ -4,9 +4,9 @@ terraform {
       source  = "CiscoDevNet/aci"
       version = ">= 2.6.1"
     }
-    utils = {
-      source  = "netascode/utils"
-      version = ">= 0.2.4"
+    local = {
+      source  = "hashicorp/local"
+      version = ">= 2.3.0"
     }
   }
 
@@ -19,12 +19,11 @@ terraform {
   }
 }
 
-locals {
-  model = yamldecode(data.utils_yaml_merge.model.output)
-}
+module "merge" {
+  source  = "netascode/nac-merge/utils"
+  version = "0.1.2"
 
-data "utils_yaml_merge" "model" {
-  input = [for file in fileset(path.module, "data/*.yaml") : file(file)]
+  yaml_strings = [for file in fileset(path.module, "data/*.yaml") : file(file)]
 }
 
 module "tenant" {
@@ -32,6 +31,11 @@ module "tenant" {
   version = "0.4.2"
 
   for_each    = { for tenant in try(local.model.apic.tenants, []) : tenant.name => tenant }
-  model       = local.model
+  model       = module.merge.model
   tenant_name = each.value.name
+}
+
+resource "local_sensitive_file" "defaults" {
+  content  = yamlencode(module.merge.defaults)
+  filename = "${path.module}/defaults.yaml"
 }

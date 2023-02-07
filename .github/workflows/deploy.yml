@@ -60,7 +60,7 @@ jobs:
           ACI_PASSWORD: ${{ secrets.ACI_PASSWORD }}
         run: |
           set -o pipefail
-          iac-test --data ./data --templates ./tests/templates --output ./tests/results/aci |& tee test_output.txt
+          iac-test --data ./data --data ./defaults.yaml --templates ./tests/templates --output ./tests/results/aci |& tee test_output.txt
           \cp tests/results/aci/log.html /tmp
 
       - name: Webex Notifcation
