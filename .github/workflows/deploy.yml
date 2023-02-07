@@ -29,19 +29,15 @@ jobs:
       - name: Restore Terraform Cache
         uses: actions/cache/restore@v3
         with:
-          path: .terraform
+          path: |
+            .terraform
+            defaults.yaml
           key: terraform
 
       - name: Terraform Init
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
         run: terraform init -input=false
-
-      - name: Save Terraform Cache
-        uses: actions/cache/save@v3
-        with:
-          path: .terraform
-          key: terraform
 
       - name: Terraform Apply
         env:
@@ -50,6 +46,15 @@ jobs:
           ACI_USERNAME: ${{ secrets.ACI_USERNAME }}
           ACI_PASSWORD: ${{ secrets.ACI_PASSWORD }}
         run: terraform apply -input=false -auto-approve
+
+      - name: Save Terraform Cache
+        uses: actions/cache/save@v3
+        if: always()
+        with:
+          path: |
+            .terraform
+            defaults.yaml
+          key: terraform
 
       - name: Test Idempotency
         env:
