@@ -1,4 +1,4 @@
-# Cisco Live US 2023 BRKDCN-2673 Demo
+# Cisco Live EMEA 2024 BRKDCN-2673 Demo
 
 ## Setup
 
