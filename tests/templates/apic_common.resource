@@ -10,14 +10,13 @@ ${login_json}   {"aaaUser" : {"attributes" : {"name" : "%{ACI_USERNAME}", "pwd" 
 *** Keywords ***
 Get APIC Token
     Create Session   login   %{ACI_URL}
-    ${response}=   POST On Session   login   /api/aaaLogin.json   data=${login_json}
+    ${log_level}=   Set Log Level   NONE
+    ${response}=   Wait Until Keyword Succeeds   6x   10s   POST On Session   login   /api/aaaLogin.json   data=${login_json}
+    Set Log Level   ${log_level}
     ${r_token}=   Get Value From Json   ${response.json()}   $..token
     Set Parallel Value For Key   apic_token   ${r_token[0]}
-    Set Suite Variable   ${apic_token}   ${r_token[0]}
 
 Login APIC
-    Wait Until Keyword Succeeds   5x   1 s   Acquire Lock   login
+    Run Only Once   Get APIC Token
     ${apic_token}=   Get Parallel Value For Key   apic_token
-    Run Keyword If   "${apic_token}"=="${EMPTY}"   Get APIC Token
-    Release Lock   login
     Create Session   apic   %{ACI_URL}   headers={"Cookie": "APIC-cookie=${apic_token}"}
