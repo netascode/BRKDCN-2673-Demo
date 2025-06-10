@@ -4,8 +4,8 @@
 
 Install [Terraform](https://www.terraform.io/downloads), and the following two Python tools:
 
-- [iac-validate](https://github.com/netascode/iac-validate)
-- [iac-test](https://github.com/netascode/iac-test)
+- [nac-validate](https://github.com/netascode/nac-validate)
+- [nac-test](https://github.com/netascode/nac-test)
 
 ```shell
 pip install -r requirements.txt
@@ -44,7 +44,7 @@ terraform init
 ## Pre-Change Validation
 
 ```shell
-iac-validate ./data/
+nac-validate ./data/
 ```
 
 ## Terraform Plan/Apply
@@ -56,5 +56,5 @@ terraform apply
 ## Testing
 
 ```shell
-iac-test --data ./data --data ./defaults.yaml --templates ./tests/templates --output ./tests/results/aci
+nac-test --data ./data --data ./defaults.yaml --templates ./tests/templates --output ./tests/results/aci
 ```

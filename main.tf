@@ -10,7 +10,7 @@ terraform {
 
 module "aci" {
   source  = "netascode/nac-aci/aci"
-  version = "0.9.0"
+  version = "1.0.1"
 
   yaml_directories          = ["data"]
   manage_tenants            = true
